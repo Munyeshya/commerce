@@ -1,0 +1,356 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+{% block title %}{{ product.title }}{% endblock %} 
+{% block content %}
+
+	<section class="item-details section">
+        <div class="container">
+            <div class="top-area">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-12">
+                        <div class="product-images">
+                            <main id="gallery">
+                                <div class="main-img">
+                                    <img src="{{ product.image.url }}" id="current" alt="#">
+                                </div>
+                                <div class="images">
+                                    <img src="{{ product.image.url }}" id="current" alt="#">
+                                    {% for p_image in p_images %}
+                                        <img src="{{ p_image.images.url }}" class="img" alt="#">
+                                    {% endfor %}
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-12">
+                        <div class="product-info">
+                            <h2 class="title">{{ product.title }}</h2>
+                            <p class="location">
+                                <i class="lni lni-map-marker"></i>
+                                <a href="javascript:void(0)">Kigali, Rwanda</a>
+                            </p>
+                            <h3 class="price">${{ product.price }}</h3>
+                            <div class="login-button mt-3">
+                                <ul class="d-flex justify-content-between">
+                                    <li>
+                                        <div class="input-group mb-3">
+                                            <select class="custom-select rounded-left" style="outline: none;">
+                                                <option selected>Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <div class="input-group-append">
+                                                <label class="input-group-text text-white" style="background: #5830E0;">Qty</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="button header-button">
+                                        <a href="#" class="btn button header-button text-white">
+                                            Add to cart
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="list-info">
+                                <h4>Informations</h4>
+                                <ul>
+                                    <li><span>Condition:</span> {{ product.condition }}</li>
+                                    <li><span>Brand:</span> {{ product.brand }}</li>
+                                    <li><span>Model:</span> {{ product.model }}</li>
+                                </ul>
+                            </div>
+                            <div class="contact-info">
+                                <ul>
+                                    <li>
+                                        {% if address.status == True %}
+                                            <a href="#" class="call">
+                                                <i class="lni lni-checkmark-circle"></i>
+                                                Vendor is
+                                                <span>Verified</span>
+                                            </a>
+                                        {% else %}
+                                            <a href="#" class="call">
+                                                <i class="lni lni-cross-circle"></i>
+                                                Vendor is
+                                                <span>Not Verified</span>
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="social-share">
+                                <h4>Share Ad</h4>
+                                <ul>
+                                    <li><a href="javascript:void(0)" class="facebook"><i class="lni lni-facebook-filled"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="twitter"><i class="lni lni-twitter-original"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="linkedin"><i class="lni lni-linkedin-original"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="pinterest"><i class="lni lni-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-details-blocks">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-12">
+                        <!-- Start Single Block -->
+                        <div class="single-block description">
+                            <h3>Description</h3>
+                            <p>
+                                {{ product.description }}
+                            </p>
+                            <ul>
+                                <li>
+                                    {{ product.specifications }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="single-block tags">
+                            <h3>Tags</h3>
+                            <ul>
+                                {% for tag in product.tags.all %}
+                                    <li>
+                                        <a href="">
+                                            {{ tag.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="single-block tags">
+                            <h3>Return & Warranty</h3>
+                            <ul>
+                                <li>Days to Return: <a href="#">{{ product.vendor.days_return }} days</a></li><br>
+                                <li>Warranty Period: <a href="#">{{ product.vendor.warranty_period }} months</a></li><br>
+                            </ul>
+                        </div>
+                        <div class="single-block comments">
+                            <h3>Comments</h3>
+                            <div class="single-comment">
+                                <img src="{% static 'images/testimonial/testi2.jpg' %}" alt="#">
+                                <div class="content">
+                                    <h4>Luis Havens</h4>
+                                    <span>25 Feb, 2023</span>
+                                    <p>
+                                        There are many variations of passages of Lorem Ipsum available, but the majority
+                                        have suffered alteration in some form, by injected humour, or randomised words
+                                        which don't look even slightly believable.
+                                    </p>
+                                    <a href="javascript:void(0)" class="reply"><i class="lni lni-reply"></i> Reply</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-block comment-form">
+                            <h3>Post a comment</h3>
+                            <form action="#" method="POST">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-box form-group">
+                                            <input type="text" name="name" class="form-control form-control-custom"
+                                                placeholder="Your Name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-box form-group">
+                                            <input type="email" name="email" class="form-control form-control-custom"
+                                                placeholder="Your Email" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-box form-group">
+                                            <textarea name="#" class="form-control form-control-custom"
+                                                placeholder="Your Comments"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="button">
+                                            <button type="submit" class="btn">Post Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-12">
+                        <div class="item-details-sidebar">
+                            <div class="single-block author">
+                                <h3>Vendor</h3>
+                                <div class="content">
+                                    <img src="{{ product.vendor.image.url }}" alt="#">
+                                    <h4>{{ product.vendor.title }}</h4>
+                                    <span>Member Since {{ product.vendor.date|date:"Y" }}</span>
+                                    <a href="{% url 'base:vendorView' product.vendor.vid %}" class="see-all">See All Products</a>
+                                </div>
+                            </div>
+                            <div class="single-block">
+                                <span style="text-transform: uppercase;" class="mb-4">
+                                    <i class="lni lni-ship"></i>
+                                    Rating 
+                                    <strong style="color: #5830E0">
+                                        {{ product.vendor.authentic_rating }}%
+                                    </strong>
+                                </span> <br>
+                                <span style="text-transform: uppercase;" class="mb-4">
+                                    <i class="lni lni-ship"></i>
+                                    Ship on time 
+                                    <strong style="color: #5830E0">
+                                        {{ product.vendor.shipping_on_time }}%
+                                    </strong>
+                                </span> <br>
+                                <span style="text-transform: uppercase;">
+                                    <i class="lni lni-envelope"></i>
+                                    Chat response 
+                                    <strong style="color: #5830E0">
+                                        {{ product.vendor.chat_resp_time }}%
+                                    </strong>
+                                </span>
+                            </div>
+                            <div class="single-block contant-seller comment-form ">
+                                <h3>Contact Vendor</h3>
+                                <form action="#" method="POST">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-box form-group">
+                                                <input type="text" name="name" class="form-control form-control-custom"
+                                                    placeholder="Your Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-box form-group">
+                                                <input type="email" name="email"
+                                                    class="form-control form-control-custom" placeholder="Your Email" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-box form-group">
+                                                <textarea name="#" class="form-control form-control-custom"
+                                                    placeholder="Your Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="button">
+                                                <button type="submit" class="btn">Send Message</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="single-block ">
+                                <h3>Location</h3>
+                                <div class="mapouter">
+                                    <div class="gmap_canvas"><iframe width="100%" height="300" id="gmap_canvas"
+                                            src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                                            href="https://putlocker-is.org"></a><br>
+                                        <style>
+                                            .mapouter {
+                                                position: relative;
+                                                text-align: right;
+                                                height: 300px;
+                                                width: 100%;
+                                            }
+                                        </style><a href="https://www.embedgooglemap.net">google map code for website</a>
+                                        <style>
+                                            .gmap_canvas {
+                                                overflow: hidden;
+                                                background: none !important;
+                                                height: 300px;
+                                                width: 100%;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="items-grid section custom-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Related Products</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-head">
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                <div class="image">
+                                    <a href="{% url 'base:product' product.pid %}" class="thumbnail"><img src="{{ product.image.url }}" alt="#"></a>
+                                    <div class="author">
+                                        <div class="author-image">
+                                            <a href="javascript:void(0)"><img src="{{ product.vendor.image.url }}" alt="#">
+                                                <span>{{ product.vendor.title }}</span>
+                                            </a>
+                                        </div>
+                                        <p class="sale">For Sale</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="top-content">
+                                        <a href="javascript:void(0)" class="tag">{{ product.tag }}</a>
+                                        <h3 class="title">
+                                            <a href="{% url 'base:product' product.pid %}">{{ product.title }}</a>
+                                        </h3>
+                                        <p class="update-time">{{ product.category.title }}</p>
+                                        <ul class="rating">
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><a href="javascript:void(0)">(35)</a></li>
+                                        </ul>
+                                        <ul class="info-list">
+                                            <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> New York, US</a></li>
+                                            <li><a href="javascript:void(0)"><i class="lni lni-timer"></i> Feb 18, 2023</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="bottom-content">
+                                        <p class="price">Start From: <span>${{ product.price }}</span> {{ product.get_percentage|floatformat:0 }}%</p>
+                                        <a href="javascript:void(0)" class="like"><i class="lni lni-heart"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No Related Product</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        const current = document.getElementById("current");
+        const opacity = 0.6;
+        const imgs = document.querySelectorAll(".img");
+        imgs.forEach(img => {
+            img.addEventListener("click", (e) => {
+                //reset opacity
+                imgs.forEach(img => {
+                    img.style.opacity = 1;
+                });
+                current.src = e.target.src;
+                //adding class 
+                //current.classList.add("fade-in");
+                //opacity
+                e.target.style.opacity = opacity;
+            });
+        });
+    </script>
+
+{% endblock content %}
